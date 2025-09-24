@@ -1,3 +1,4 @@
 <h1>{{ post.title }}</h1>
 <p>{{ post.content }}</p>
 <p>Publicado: {{ post.publish_date }}</p>
+<a href="{% url 'update' post.pk %}">Update</a>
