@@ -1,5 +1,7 @@
 {% csrf_token %}
 {% for post in posts %}
-    <h1>{{ post.title }}<h1/>
-        <h2>{{ post.content }}<h2/>
+    <h2>
+        <a href="{% url 'detail' post.pk %}">{{ post.title }}</a>
+    </h2>
+    <p>{{ post.content|truncatewords:20}}</p>
 {% endfor %}
