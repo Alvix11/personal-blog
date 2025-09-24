@@ -1,5 +1,6 @@
 <form method="post">
+    {% csrf_token %}
     <p>¿Seguro que quieres eliminar "{{ object }}"?</p>
     <button type="submit">Delete</button>
-    <a href="{{ success_url }}"></a>
+    <a href="{% url 'detail' object.pk %}">Cancel</a>
 </form>
