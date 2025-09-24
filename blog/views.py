@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from django.views.generic import ListView, CreateView, UpdateView, DetailView
+from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 from django.urls import reverse_lazy
 from .models import Blog
 from .forms import BlogForm
@@ -26,3 +26,8 @@ class PostUpdateView(UpdateView):
     form_class = BlogForm
     template_name = 'post_update.html'
     success_url = reverse_lazy('list')
+    
+class PostDeleteView(DeleteView):
+    model = Blog
+    template_name = 'post_confirm_delete.html'
+    success_url = reverse_lazy(list)
