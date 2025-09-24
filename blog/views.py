@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponse
 from django.views.generic import ListView, CreateView
+from django.urls import reverse_lazy
 from .models import Blog
+from .forms import BlogForm
 
 # Create your views here.
 class PostListView(ListView):
@@ -10,4 +12,6 @@ class PostListView(ListView):
     
 class PostCreateView(CreateView):
     model = Blog
-    
+    form_class = BlogForm
+    template_name = 'post_create.html'
+    success_url = reverse_lazy('list')
