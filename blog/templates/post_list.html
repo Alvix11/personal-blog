@@ -12,7 +12,7 @@
         </h2>
         <p>{{ post.content|truncatewords:20}}</p>
     {% endfor %}
-    
-    <a href="{% url "create" %}">Create Post</a>
+
+    <a href="{% url "create" %}" class="btn btn-primary">Create Post</a>
 
 {% endblock content %}
