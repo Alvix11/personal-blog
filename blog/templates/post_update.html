@@ -1,7 +1,12 @@
+{% extends "post_create.html" %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Update</button>
-    <a href="{% url 'detail' object.pk %}">Cancel</a>
-</form>
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Update</button>
+        <a href="{% url 'list' %}" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+
+{% endblock content %}
