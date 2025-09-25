@@ -4,4 +4,5 @@
         <a href="{% url 'detail' post.pk %}">{{ post.title }}</a>
     </h2>
     <p>{{ post.content|truncatewords:20}}</p>
+    <a href="{% url "create" %}">Create Post</a>
 {% endfor %}
