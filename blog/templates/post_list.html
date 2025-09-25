@@ -1,8 +1,12 @@
-{% csrf_token %}
-{% for post in posts %}
-    <h2>
-        <a href="{% url 'detail' post.pk %}">{{ post.title }}</a>
-    </h2>
-    <p>{{ post.content|truncatewords:20}}</p>
-{% endfor %}
+{% extends "base.html" %}
+{% block title %} List {% endblock title %}
+{% block content %}
+    {% csrf_token %}
+    {% for post in posts %}
+        <h2>
+            <a href="{% url 'detail' post.pk %}">{{ post.title }}</a>
+        </h2>
+        <p>{{ post.content|truncatewords:20}}</p>
+    {% endfor %}
     <a href="{% url "create" %}">Create Post</a>
+{% endblock content %}
