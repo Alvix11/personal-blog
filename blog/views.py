@@ -1,8 +1,10 @@
-from django.shortcuts import render, HttpResponse
-from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.models import User
 from .models import Blog
-from .forms import BlogForm
+from .forms import BlogForm, LoginForm
 
 # Create your views here.
 class PostListView(ListView):
@@ -33,3 +35,21 @@ class PostDeleteView(DeleteView):
     model = Blog
     template_name = 'post_confirm_delete.html'
     success_url = reverse_lazy('list')
+    
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            
+            if user is not None:
+                login(request, user)
+                return redirect('list')
+            else:
+                form.add_error(None, 'Username or password incorrect')
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form':form})
