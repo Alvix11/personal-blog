@@ -9,7 +9,7 @@ class BlogForm(forms.ModelForm):
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'placeholder': 'Enter the blog title...'
-        })
+        }),
         )
     
     content = forms.CharField(
@@ -25,3 +25,18 @@ class BlogForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = ['title', 'content']
+
+class LoginForm(forms.Form):
+    username = forms.CharField(
+        widget = forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Write your username'
+        })
+    )
+    
+    password = forms.CharField(
+        widget = forms.PasswordInput(attrs={
+            'class': 'form-control', 
+            'placeholder': 'Write your password'
+            })
+    )
