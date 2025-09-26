@@ -1,6 +1,14 @@
-<form method="post">
-    {% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <button type="submit">Delete</button>
-    <a href="{% url 'detail' object.pk %}">Cancel</a>
-</form>
+{% extends "base.html" %}
+
+{% block content %}
+    
+    <div class="container mt-4" style="max-width: 900px;">
+        <form method="post">
+            {% csrf_token %}
+            <h2>Are you sure you want to delete "{{ object }}"?</h2>
+            <button type="submit" class="btn btn-danger mt-3">Delete</button>
+            <a href="{% url 'detail' object.pk %}" class="btn btn-secondary mt-3 ms-2">Cancel</a>
+        </form>
+    </div>
+
+{% endblock content %}
