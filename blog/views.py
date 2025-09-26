@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
@@ -54,3 +55,9 @@ def login_view(request):
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form':form})
+
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('login')
+    return render(request, 'logout_confirm.html')
