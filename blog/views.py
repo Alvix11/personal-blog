@@ -6,7 +6,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DetailView, D
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from .models import Blog
-from .forms import BlogForm, LoginForm
+from .forms import BlogForm, LoginForm, SignUpForm
 
 # Create your views here.
 class PostListView(LoginRequiredMixin, ListView):
@@ -61,3 +61,15 @@ def logout_view(request):
         logout(request)
         return redirect('login')
     return render(request, 'logout_confirm.html')
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = SignUpForm()
+        
+    return render(request, 'signup.html', {'form':form})
