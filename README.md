@@ -67,7 +67,7 @@ The interface uses Bootstrap for a modern look and includes access control for a
 
 ## Based on
 
-This project is based on the learning and practice projects suggested by roadmap.sh, a popular resource for developers.
+This project is based on the learning and practice projects suggested by [roadmap.sh](https://roadmap.sh/projects/personal-blog), a popular resource for developers.
 
 ## License
 
