@@ -54,7 +54,9 @@ The interface uses Bootstrap for a modern look and includes access control for a
 
 - Access the blog at `http://127.0.0.1:8000/`
 - Admin panel at `http://127.0.0.1:8000/admin/`
-- Register, login, and manage posts as an admin user.
+- Register and login as a regular user to view posts.
+- **To create, edit, or delete posts, you must be an admin user.**
+- Create a superuser with Django (`python manage.py createsuperuser`) and log in with those credentials to access admin-only features.
 
 ## Folder Structure
 
