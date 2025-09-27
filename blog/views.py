@@ -1,14 +1,22 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from .models import Blog
 from .forms import BlogForm, LoginForm, SignUpForm
 
 # Create your views here.
+class OnlyAdminMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.is_staff
+    
+    def handle_no_permission(self):
+        return redirect('login')
+
 class PostListView(LoginRequiredMixin, ListView):
     model = Blog
     template_name = 'post_list.html'
@@ -19,13 +27,13 @@ class PostDetailView(LoginRequiredMixin, DetailView):
     template_name = 'post_detail.html'
     context_object_name = 'post'
     
-class PostCreateView(LoginRequiredMixin, CreateView):
+class PostCreateView(OnlyAdminMixin, CreateView):
     model = Blog
     form_class = BlogForm
     template_name = 'post_create.html'
     success_url = reverse_lazy('list')
     
-class PostUpdateView(LoginRequiredMixin, UpdateView):
+class PostUpdateView(OnlyAdminMixin, UpdateView):
     model = Blog
     form_class = BlogForm
     template_name = 'post_update.html'
@@ -33,7 +41,7 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('detail', kwargs={'pk': self.object.pk})
     
-class PostDeleteView(LoginRequiredMixin, DeleteView):
+class PostDeleteView(OnlyAdminMixin, DeleteView):
     model = Blog
     template_name = 'post_confirm_delete.html'
     success_url = reverse_lazy('list')
@@ -56,6 +64,7 @@ def login_view(request):
         form = LoginForm()
     return render(request, 'login.html', {'form':form})
 
+@login_required
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
