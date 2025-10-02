@@ -1,8 +1,9 @@
 # Personal Blog
 
 A personal blog web application built with Django.
-It allows authenticated users to create, list, edit, and delete posts, with admin panel access and user authentication.
-The interface uses Bootstrap for a modern look and includes access control for administrators.
+It allows authenticated users to read posts.
+Only the admin has the privilege to create, list, edit and delete posts, with access to the admin panel and user authentication.
+The interface uses Bootstrap for a modern look and feel.
 
 ## Features
 
