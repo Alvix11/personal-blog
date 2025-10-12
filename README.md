@@ -18,7 +18,7 @@ The interface uses Bootstrap for a modern look and feel.
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/personal-blog.git
+   git clone https://github.com/Alvix11/personal-blog.git
    cd personal-blog
    ```
 
